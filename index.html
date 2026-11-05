@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grandfather Mountain Rentals | Luxury Appalachian Vacation Rentals</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for high quality icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        timber: '#1F2E23',     /* Deep Forest Green */
+                        mountain: '#2C3E30',   /* Muted Pine */
+                        sand: '#F7F5F0',       /* Warm Cream background */
+                        earth: '#D99B26',      /* Warm Wood accent */
+                        stone: '#8A8680',      /* Soft Slate gray */
+                        charcoal: '#1A1A1A'    /* Dark Charcoal for text */
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F5F0;
+            color: #1A1A1A;
+        }
+        .font-serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom datepicker dropdown styling */
+        .datepicker-dropdown {
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* Glassmorphism styling */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        /* Hide scrollbars for slick category sliding */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-timber text-sand px-4 py-2 text-xs text-center font-medium tracking-wider flex justify-center items-center gap-2">
+        <span class="bg-earth text-white px-2 py-0.5 rounded text-[10px] uppercase font-bold">Best Rate Guarantee</span>
+        <span>Book Direct via Houfy & Save Up to 15% vs Third-Party Sites!</span>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-sand/90 backdrop-blur-md border-b border-stone/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- BRAND LOGO -->
+                <a href="#hero" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-full bg-timber text-sand flex items-center justify-center font-serif text-lg font-bold group-hover:bg-earth transition-colors">
+                        GMR
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif-title text-lg font-bold tracking-tight text-timber uppercase">Grandfather Mountain</span>
+                        <span class="text-[10px] tracking-widest text-stone uppercase -mt-1 font-semibold">Vacation Rentals & Cabins</span>
+                    </div>
+                </a>
+
+                <!-- DESKTOP NAVIGATION LINKS -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-charcoal">
+                    <a href="#hero" class="hover:text-earth transition-colors py-1 border-b-2 border-transparent hover:border-earth">Home</a>
+                    <a href="#rentals" class="hover:text-earth transition-colors py-1 border-b-2 border-transparent hover:border-earth">Our Cabins</a>
+                    <a href="#houfy-integration" class="hover:text-earth transition-colors py-1 border-b-2 border-transparent hover:border-earth">Live Availability</a>
+                    <a href="#blog-section" class="hover:text-earth transition-colors py-1 border-b-2 border-transparent hover:border-earth">Mountain Journal & Blog</a>
+                    <a href="#about" class="hover:text-earth transition-colors py-1 border-b-2 border-transparent hover:border-earth">About Banner Elk</a>
+                </nav>
+
+                <!-- HEADER CTA -->
+                <div class="hidden sm:flex items-center space-x-4">
+                    <a href="tel:8285550199" class="text-xs font-semibold text-stone hover:text-timber flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-earth"></i> (828) 555-0199
+                    </a>
+                    <a href="#houfy-integration" class="bg-timber text-sand px-5 py-2.5 rounded-full text-xs font-semibold hover:bg-earth transition-all shadow-md hover:shadow-lg">
+                        Book Your Stay
+                    </a>
+                </div>
+
+                <!-- MOBILE MENU BUTTON -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-charcoal hover:text-earth focus:outline-none p-2" aria-label="Toggle Navigation">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE NAVIGATION MENU -->
+        <div id="mobile-menu" class="hidden md:hidden bg-sand border-b border-stone/20 px-4 pt-2 pb-6 space-y-3">
+            <a href="#hero" class="block py-2 text-base font-medium text-charcoal hover:text-earth border-b border-stone/10">Home</a>
+            <a href="#rentals" class="block py-2 text-base font-medium text-charcoal hover:text-earth border-b border-stone/10">Our Cabins</a>
+            <a href="#houfy-integration" class="block py-2 text-base font-medium text-charcoal hover:text-earth border-b border-stone/10">Check Availability</a>
+            <a href="#blog-section" class="block py-2 text-base font-medium text-charcoal hover:text-earth border-b border-stone/10">Mountain Journal & Travel Blog</a>
+            <a href="#about" class="block py-2 text-base font-medium text-charcoal hover:text-earth">Destination Guide</a>
+            <div class="pt-4 flex flex-col gap-3">
+                <a href="#houfy-integration" class="w-full text-center bg-timber text-sand py-3 rounded-xl font-semibold text-sm">Book Direct via Houfy</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION WITH INTEGRATED AIRBNB-STYLE BOOKING SEARCH WIDGET -->
+    <section id="hero" class="relative min-h-[620px] flex items-center justify-center pt-8 pb-16 px-4 sm:px-6 lg:px-8 bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(31, 46, 35, 0.45), rgba(31, 46, 35, 0.7)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1920&q=80');">
+        
+        <div class="max-w-5xl w-full mx-auto text-center z-10 space-y-6">
+            
+            <div class="inline-flex items-center gap-2 bg-sand/20 backdrop-blur-md px-4 py-1.5 rounded-full text-sand text-xs font-semibold tracking-wider uppercase border border-sand/30">
+                <i class="fa-solid fa-mountain text-earth"></i> Banner Elk & Sugar Mountain, NC
+            </div>
+
+            <h1 class="font-serif-title text-4xl sm:text-5xl lg:text-6xl text-white font-normal leading-tight tracking-tight drop-shadow-md">
+                Unwind in the Heart of the <span class="italic font-light">Blue Ridge Mountains</span>
+            </h1>
+
+            <p class="text-sand/90 text-base sm:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                Handcrafted mountain log cabins and luxury vacation rentals overlooking Grandfather Mountain. Directly integrated with Houfy for zero guest fees.
+            </p>
+
+            <!-- =============================================================== -->
+            <!-- REQUIREMENT 3: HOUFY AIRBNB-INSPIRED BOOKING SEARCH WIDGET -->
+            <!-- =============================================================== -->
+            <div class="pt-4 w-full max-w-4xl mx-auto">
+                <div class="glass-panel p-3 sm:p-4 rounded-3xl shadow-2xl text-left border border-white/60">
+                    
+                    <!-- Search Widget Form Header -->
+                    <div class="flex items-center justify-between px-3 pb-2 text-xs font-medium text-timber border-b border-stone/10 mb-2">
+                        <span class="flex items-center gap-2 font-bold uppercase tracking-wider text-[11px]">
+                            <i class="fa-solid fa-calendar-check text-earth"></i> Direct Houfy Booking Engine
+                        </span>
+                        <span class="text-stone text-[11px] hidden sm:inline"><i class="fa-solid fa-shield-halved text-emerald-600"></i> No Booking Fees Guaranteed</span>
+                    </div>
+
+                    <!-- Input Grid (Airbnb Style Layout) -->
+                    <form id="hero-booking-form" onsubmit="handleHoufySearch(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+                        
+                        <!-- Check-In Field -->
+                        <div class="relative bg-white hover:bg-stone/5 border border-stone/20 rounded-2xl p-3 transition-all focus-within:ring-2 focus-within:ring-timber focus-within:bg-white">
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone">Check-In</label>
+                            <input type="date" id="checkin-date" required class="w-full text-sm font-semibold text-charcoal bg-transparent border-none focus:outline-none cursor-pointer pt-0.5">
+                            <span class="text-[11px] text-stone block -mt-1 font-normal">Add arrival date</span>
+                        </div>
+
+                        <!-- Check-Out Field -->
+                        <div class="relative bg-white hover:bg-stone/5 border border-stone/20 rounded-2xl p-3 transition-all focus-within:ring-2 focus-within:ring-timber focus-within:bg-white">
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone">Check-Out</label>
+                            <input type="date" id="checkout-date" required class="w-full text-sm font-semibold text-charcoal bg-transparent border-none focus:outline-none cursor-pointer pt-0.5">
+                            <span class="text-[11px] text-stone block -mt-1 font-normal">Add departure date</span>
+                        </div>
+
+                        <!-- Guests Field -->
+                        <div class="relative bg-white hover:bg-stone/5 border border-stone/20 rounded-2xl p-3 transition-all focus-within:ring-2 focus-within:ring-timber focus-within:bg-white">
+                            <label class="block text-[10px] font-bold uppercase tracking-wider text-stone">Guests & Cabin</label>
+                            <select id="guest-count" class="w-full text-sm font-semibold text-charcoal bg-transparent border-none focus:outline-none cursor-pointer pt-0.5">
+                                <option value="all">All Accommodations</option>
+                                <option value="2">2 Guests (Cozy Cabin)</option>
+                                <option value="4">4-6 Guests (Family Lodge)</option>
+                                <option value="8">8+ Guests (Grand Estate)</option>
+                            </select>
+                            <span class="text-[11px] text-stone block -mt-1 font-normal">Select party size</span>
+                        </div>
+
+                        <!-- Search CTA Button -->
+                        <div class="flex items-center">
+                            <button type="submit" class="w-full h-full min-h-[54px] bg-earth hover:bg-timber text-white font-bold rounded-2xl flex items-center justify-center gap-2 px-6 shadow-lg hover:shadow-xl transition-all duration-300 transform active:scale-[0.98]">
+                                <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                                <span>Check Availability</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Real-Time Status Notification Bar -->
+                    <div id="booking-feedback" class="hidden mt-3 px-3 py-2 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800 flex items-center justify-between">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-notch fa-spin text-emerald-600"></i>
+                            <span>Connecting to live Houfy availability engine for requested dates...</span>
+                        </span>
+                        <a id="houfy-direct-link" href="https://www.houfy.com" target="_blank" class="underline font-semibold text-emerald-900">Proceed to Houfy Checkout &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- QUICK TRUST & VALUE PROPOSITION BAR -->
+    <section class="bg-timber text-sand py-8 border-t border-earth/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-2 space-y-1">
+                    <i class="fa-solid fa-house-mountain text-earth text-2xl mb-1"></i>
+                    <h3 class="font-bold text-sm">Prime Mountain Locations</h3>
+                    <p class="text-xs text-sand/70">Minutes from Sugar & Beech Mountain slopes</p>
+                </div>
+                <div class="p-2 space-y-1">
+                    <i class="fa-solid fa-coins text-earth text-2xl mb-1"></i>
+                    <h3 class="font-bold text-sm">Zero Guest Commission</h3>
+                    <p class="text-xs text-sand/70">Powered by transparent Houfy direct booking</p>
+                </div>
+                <div class="p-2 space-y-1">
+                    <i class="fa-solid fa-hot-tub-person text-earth text-2xl mb-1"></i>
+                    <h3 class="font-bold text-sm">Luxury Cabin Amenities</h3>
+                    <p class="text-xs text-sand/70">Hot tubs, fireplaces, high-speed WiFi & decks</p>
+                </div>
+                <div class="p-2 space-y-1">
+                    <i class="fa-solid fa-heart-circle-check text-earth text-2xl mb-1"></i>
+                    <h3 class="font-bold text-sm">Local Superhosts</h3>
+                    <p class="text-xs text-sand/70">Dedicated high-country hospitality</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PROPERTY RENTALS SECTION -->
+    <section id="rentals" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+            <div>
+                <span class="text-earth uppercase tracking-widest text-xs font-bold">Featured Accommodations</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-timber mt-1">Our Grandfather Mountain Properties</h2>
+                <p class="text-stone text-sm mt-2 max-w-xl">Explore our handpicked mountain retreats. Select dates above or click on any property to verify real-time availability via Houfy.</p>
+            </div>
+            <div class="mt-4 md:mt-0">
+                <a href="#houfy-integration" class="inline-flex items-center gap-2 text-timber font-semibold text-sm hover:text-earth transition-colors">
+                    View All Properties on Houfy Calendar <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Property Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Property 1 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone/10 flex flex-col group">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&q=80" alt="High Country Haven Cabin" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-timber/90 text-sand text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm">Sugar Mountain View</span>
+                    <span class="absolute top-4 right-4 bg-white/90 text-timber text-xs font-bold px-2.5 py-1 rounded-full shadow"><i class="fa-solid fa-star text-amber-500"></i> 4.98</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif-title text-xl font-bold text-timber group-hover:text-earth transition-colors">High Country Haven</h3>
+                            <span class="text-lg font-bold text-timber">$245 <span class="text-xs font-normal text-stone">/ night</span></span>
+                        </div>
+                        <p class="text-stone text-xs leading-relaxed line-clamp-2">Authentic log cabin boasting panoramic views of Grandfather Mountain, private hot tub, stone fireplace, and game room.</p>
+                        <div class="flex flex-wrap gap-4 text-xs font-medium text-stone mt-4 pt-3 border-t border-stone/10">
+                            <span><i class="fa-solid fa-bed text-earth mr-1"></i> 3 Beds</span>
+                            <span><i class="fa-solid fa-bath text-earth mr-1"></i> 2.5 Baths</span>
+                            <span><i class="fa-solid fa-users text-earth mr-1"></i> Sleeps 6</span>
+                        </div>
+                    </div>
+                    <button onclick="triggerHoufyListing('High Country Haven', 'https://www.houfy.com')" class="w-full py-3 bg-sand hover:bg-timber text-timber hover:text-sand border border-stone/20 rounded-2xl text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <span>Check Availability on Houfy</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Property 2 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone/10 flex flex-col group">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" alt="Grandfather Crest Lodge" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-timber/90 text-sand text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm">Banner Elk Center</span>
+                    <span class="absolute top-4 right-4 bg-white/90 text-timber text-xs font-bold px-2.5 py-1 rounded-full shadow"><i class="fa-solid fa-star text-amber-500"></i> 5.0</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif-title text-xl font-bold text-timber group-hover:text-earth transition-colors">Grandfather Crest Lodge</h3>
+                            <span class="text-lg font-bold text-timber">$385 <span class="text-xs font-normal text-stone">/ night</span></span>
+                        </div>
+                        <p class="text-stone text-xs leading-relaxed line-clamp-2">Spacious luxury timberframe home ideal for large families. Features gourmet kitchen, sprawling multi-level deck, and firepit.</p>
+                        <div class="flex flex-wrap gap-4 text-xs font-medium text-stone mt-4 pt-3 border-t border-stone/10">
+                            <span><i class="fa-solid fa-bed text-earth mr-1"></i> 5 Beds</span>
+                            <span><i class="fa-solid fa-bath text-earth mr-1"></i> 4 Baths</span>
+                            <span><i class="fa-solid fa-users text-earth mr-1"></i> Sleeps 10</span>
+                        </div>
+                    </div>
+                    <button onclick="triggerHoufyListing('Grandfather Crest Lodge', 'https://www.houfy.com')" class="w-full py-3 bg-sand hover:bg-timber text-timber hover:text-sand border border-stone/20 rounded-2xl text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <span>Check Availability on Houfy</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-stone/10 flex flex-col group">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80" alt="Whispering Pines Cottage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-timber/90 text-sand text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm">Secluded Romantic Escape</span>
+                    <span class="absolute top-4 right-4 bg-white/90 text-timber text-xs font-bold px-2.5 py-1 rounded-full shadow"><i class="fa-solid fa-star text-amber-500"></i> 4.96</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif-title text-xl font-bold text-timber group-hover:text-earth transition-colors">Whispering Pines Chalet</h3>
+                            <span class="text-lg font-bold text-timber">$195 <span class="text-xs font-normal text-stone">/ night</span></span>
+                        </div>
+                        <p class="text-stone text-xs leading-relaxed line-clamp-2">Charming mountain chalet nestled in quiet evergreen woods. Perfect romantic getaway featuring outdoor soaking hot tub.</p>
+                        <div class="flex flex-wrap gap-4 text-xs font-medium text-stone mt-4 pt-3 border-t border-stone/10">
+                            <span><i class="fa-solid fa-bed text-earth mr-1"></i> 2 Beds</span>
+                            <span><i class="fa-solid fa-bath text-earth mr-1"></i> 2 Baths</span>
+                            <span><i class="fa-solid fa-users text-earth mr-1"></i> Sleeps 4</span>
+                        </div>
+                    </div>
+                    <button onclick="triggerHoufyListing('Whispering Pines Chalet', 'https://www.houfy.com')" class="w-full py-3 bg-sand hover:bg-timber text-timber hover:text-sand border border-stone/20 rounded-2xl text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <span>Check Availability on Houfy</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- HOUFY EMBED INTEGRATION & TECHNICAL DEMO CONTAINER -->
+    <section id="houfy-integration" class="relative py-20 px-4 sm:px-6 lg:px-8 border-y border-stone/20 bg-cover bg-center bg-fixed" style="background-image: linear-gradient(to bottom, rgba(31, 46, 35, 0.88), rgba(31, 46, 35, 0.92)), url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1920&q=80');">
+        <div class="max-w-7xl mx-auto space-y-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="bg-earth text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-md">Live System Architecture</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-sand mt-4">Houfy Direct Booking Engine Integration</h2>
+                <p class="text-sand/80 text-xs sm:text-sm mt-3 leading-relaxed">
+                    Below is the integrated Houfy embed component. All availability queries, calendar synchronization, pricing rules, and booking checkouts are live-rendered from Houfy's real-time inventory system.
+                </p>
+            </div>
+
+            <!-- Simulated Live Houfy Widget Container with Glassmorphism Overlay -->
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/40">
+                <div class="flex flex-col lg:flex-row items-center justify-between pb-6 border-b border-stone/10 gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-timber text-earth flex items-center justify-center text-2xl shadow-inner">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-timber text-lg">Grandfather Mountain Master Houfy Calendar</h3>
+                            <p class="text-stone text-xs">Real-time availability feed directly synced with Houfy listing manager</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Houfy Synced Live
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Houfy Interactive Embed Canvas with Soft Mountain Silhouette Overlay -->
+                <div class="relative overflow-hidden py-12 px-6 sm:px-10 text-center rounded-2xl my-6 border border-stone/20 bg-cover bg-center shadow-inner group" style="background-image: linear-gradient(to bottom, rgba(31, 46, 35, 0.75), rgba(31, 46, 35, 0.88)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80');">
+                    <!-- Subtle ambient lighting & pattern overlays -->
+                    <div class="absolute inset-0 opacity-10 pointer-events-none bg-repeat bg-center" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-earth/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="relative z-10 max-w-xl mx-auto space-y-4">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-sand/10 backdrop-blur-md border border-white/20 text-earth flex items-center justify-center text-2xl shadow-xl transform group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                        <h4 class="font-serif-title text-2xl font-bold text-sand tracking-tight">Interactive Houfy Date & Rates Engine</h4>
+                        <p class="text-sand/85 text-xs sm:text-sm leading-relaxed">
+                            This section represents the live HTML/JS iframe snippet provided by Houfy for Grandfather Mountain Rentals. Visitors select dates to inspect instant rates with zero service fees.
+                        </p>
+                        <div class="pt-2 flex flex-wrap justify-center gap-4">
+                            <a href="https://www.houfy.com" target="_blank" class="inline-flex items-center gap-2 bg-earth hover:bg-white hover:text-timber text-white px-7 py-3.5 rounded-full text-xs font-bold transition-all shadow-lg hover:shadow-xl">
+                                Open Full Houfy Listing Directory <i class="fa-solid fa-external-link text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============================================================== -->
+    <!-- REQUIREMENT 1: REORGANIZED BLOG & MOUNTAIN JOURNAL HOMEPAGE -->
+    <!-- =============================================================== -->
+    <section id="blog-section" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        
+        <!-- SECTION HEADER -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-stone/20">
+            <div>
+                <span class="text-earth uppercase tracking-widest text-xs font-bold">The High Country Journal</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-timber mt-1">Grandfather Mountain Travel & Local Guide</h2>
+                <p class="text-stone text-sm mt-2 max-w-2xl">
+                    Discover local dining secrets, seasonal hiking routes, ski conditions, and insider recommendations written by local Banner Elk hosts.
+                </p>
+            </div>
+            
+            <!-- BLOG CATEGORY FILTERS -->
+            <div class="mt-6 md:mt-0 flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 md:pb-0">
+                <button onclick="filterBlog('all')" class="blog-cat-btn active bg-timber text-sand px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all">All Articles</button>
+                <button onclick="filterBlog('guides')" class="blog-cat-btn bg-white hover:bg-stone/20 text-charcoal border border-stone/20 px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Area Guides</button>
+                <button onclick="filterBlog('activities')" class="blog-cat-btn bg-white hover:bg-stone/20 text-charcoal border border-stone/20 px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Outdoor Activities</button>
+                <button onclick="filterBlog('dining')" class="blog-cat-btn bg-white hover:bg-stone/20 text-charcoal border border-stone/20 px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Dining & Wineries</button>
+            </div>
+        </div>
+
+        <!-- FEATURED ARTICLE HERO CARD -->
+        <div class="mb-12">
+            <article class="bg-white rounded-3xl overflow-hidden shadow-lg border border-stone/10 grid grid-cols-1 lg:grid-cols-12 group">
+                <div class="lg:col-span-7 relative h-72 lg:h-auto min-h-[320px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Autumn in Banner Elk" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <span class="absolute top-6 left-6 bg-earth text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow">Featured Guide</span>
+                </div>
+                <div class="lg:col-span-5 p-8 lg:p-10 flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 text-xs text-stone font-medium">
+                            <span><i class="fa-regular fa-calendar text-earth mr-1"></i> October 24, 2026</span>
+                            <span>•</span>
+                            <span><i class="fa-regular fa-clock text-earth mr-1"></i> 6 min read</span>
+                        </div>
+                        <h3 class="font-serif-title text-2xl lg:text-3xl font-bold text-timber leading-tight group-hover:text-earth transition-colors">
+                            The Ultimate Autumn Guide to Banner Elk & Grandfather Mountain Hiking
+                        </h3>
+                        <p class="text-stone text-xs sm:text-sm leading-relaxed">
+                            Experience vibrant fall foliage, Mile High Swinging Bridge photography tips, and cozy evening fireplaces. Here is our complete itinerary for an unforgettable High Country autumn stay.
+                        </p>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-stone/10 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-timber text-sand flex items-center justify-center font-bold text-xs">GMR</div>
+                            <span class="text-xs font-semibold text-timber">GMR Local Host Team</span>
+                        </div>
+                        <button onclick="openBlogArticle('autumn-guide')" class="inline-flex items-center gap-2 text-xs font-bold text-timber hover:text-earth">
+                            Read Full Article <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- REORGANIZED ARTICLE GRID LISTING -->
+        <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Article Item 1 -->
+            <article class="blog-card activities bg-white rounded-3xl overflow-hidden shadow-sm border border-stone/10 flex flex-col group hover:shadow-xl transition-all duration-300">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=800&q=80" alt="Skiing Sugar Mountain" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-timber/90 text-sand text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Winter Sports</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="text-[11px] text-stone font-medium">January 12, 2026 • 4 min read</div>
+                        <h3 class="font-serif-title text-lg font-bold text-timber group-hover:text-earth transition-colors leading-snug">
+                            Skiing & Snowboarding at Sugar & Beech Mountain: Insider Tips
+                        </h3>
+                        <p class="text-stone text-xs leading-relaxed line-clamp-3">
+                            Planning a winter trip? Compare slope runs, equipment rental discounts, and slope-side dining options near our vacation rentals.
+                        </p>
+                    </div>
+                    <button onclick="openBlogArticle('winter-ski')" class="inline-flex items-center gap-2 text-xs font-bold text-timber hover:text-earth pt-2 border-t border-stone/10">
+                        Read Story <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article Item 2 -->
+            <article class="blog-card dining bg-white rounded-3xl overflow-hidden shadow-sm border border-stone/10 flex flex-col group hover:shadow-xl transition-all duration-300">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80" alt="Banner Elk Wineries" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-timber/90 text-sand text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Dining & Wine</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="text-[11px] text-stone font-medium">August 18, 2026 • 5 min read</div>
+                        <h3 class="font-serif-title text-lg font-bold text-timber group-hover:text-earth transition-colors leading-snug">
+                            Top 5 Fine Dining Restaurants & Local Wineries in Banner Elk
+                        </h3>
+                        <p class="text-stone text-xs leading-relaxed line-clamp-3">
+                            From romantic vineyard tastings at Banner Elk Winery to farm-to-table cuisine, explore our favorite local culinary destinations.
+                        </p>
+                    </div>
+                    <button onclick="openBlogArticle('dining-guide')" class="inline-flex items-center gap-2 text-xs font-bold text-timber hover:text-earth pt-2 border-t border-stone/10">
+                        Read Story <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article Item 3 -->
+            <article class="blog-card guides bg-white rounded-3xl overflow-hidden shadow-sm border border-stone/10 flex flex-col group hover:shadow-xl transition-all duration-300">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" alt="Grandfather Mountain State Park" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <span class="absolute top-4 left-4 bg-timber/90 text-sand text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Area Guides</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div class="space-y-2">
+                        <div class="text-[11px] text-stone font-medium">May 30, 2026 • 7 min read</div>
+                        <h3 class="font-serif-title text-lg font-bold text-timber group-hover:text-earth transition-colors leading-snug">
+                            Visiting Grandfather Mountain State Park: Tickets, Wildlife & Trails
+                        </h3>
+                        <p class="text-stone text-xs leading-relaxed line-clamp-3">
+                            Everything you need to know before visiting the Mile High Swinging Bridge, cougar sanctuaries, and wilderness trailheads.
+                        </p>
+                    </div>
+                    <button onclick="openBlogArticle('state-park')" class="inline-flex items-center gap-2 text-xs font-bold text-timber hover:text-earth pt-2 border-t border-stone/10">
+                        Read Story <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </button>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- DESTINATION & PERMANENT PAGE UX IMPROVEMENT SECTION -->
+    <section id="about" class="bg-timber text-sand py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-6 space-y-6">
+                <span class="text-earth uppercase tracking-widest text-xs font-bold">Why Visit Banner Elk, NC</span>
+                <h2 class="font-serif-title text-3xl sm:text-4xl font-bold leading-tight">
+                    Your Four-Season Gateway to Blue Ridge Mountain Hospitality
+                </h2>
+                <p class="text-sand/80 text-sm leading-relaxed">
+                    Nestled between two of the South’s largest ski resorts and under the majestic shadow of Grandfather Mountain, Banner Elk offers a rare blend of small-town charm, outdoor adventure, and refined mountain relaxation.
+                </p>
+                
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div class="border-l-2 border-earth pl-4">
+                        <h4 class="font-bold text-sm text-sand">Spring & Summer</h4>
+                        <p class="text-xs text-sand/70 mt-1">Hiking, fly fishing, wild rhododendron blooms & cool mountain breezes.</p>
+                    </div>
+                    <div class="border-l-2 border-earth pl-4">
+                        <h4 class="font-bold text-sm text-sand">Fall & Winter</h4>
+                        <p class="text-xs text-sand/70 mt-1">Vibrant autumn foliage, Woolly Worm Festival, skiing & cozy hearth fires.</p>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <a href="#houfy-integration" class="inline-block bg-earth text-white font-bold px-8 py-3.5 rounded-full text-xs hover:bg-white hover:text-timber transition-all shadow-md">
+                        Find Your Perfect Cabin Stay
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 relative">
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-sand/10">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80" alt="Starry Mountain Night" class="w-full h-auto object-cover">
+                </div>
+                <div class="absolute -bottom-6 -left-6 bg-sand text-timber p-5 rounded-2xl shadow-2xl hidden sm:block max-w-xs border border-stone/20">
+                    <div class="flex items-center gap-2 text-earth mb-1">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <span class="font-bold text-xs text-timber">Guest Review</span>
+                    </div>
+                    <p class="text-[11px] italic text-stone">"Booking direct via Houfy saved us fees and the cabin view of Grandfather Mountain was breathtaking!"</p>
+                    <span class="block text-[10px] font-bold text-timber mt-2">— Sarah M., October 2026</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-charcoal text-sand/70 py-12 px-4 sm:px-6 lg:px-8 text-xs border-t border-stone/20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <!-- ENHANCED FOOTER BRAND LOGO BLOCK -->
+                <a href="#hero" class="group inline-flex items-center gap-3">
+                    <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-timber via-mountain to-timber text-sand flex items-center justify-center border border-earth/40 shadow-lg group-hover:border-earth group-hover:scale-105 transition-all duration-300">
+                        <i class="fa-solid fa-mountain-sun text-earth text-lg group-hover:text-white transition-colors"></i>
+                        <span class="absolute -bottom-1 -right-1 text-[9px] font-bold bg-earth text-white px-1 rounded shadow">GMR</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif-title text-lg font-bold text-white tracking-tight leading-tight group-hover:text-earth transition-colors">Grandfather Mountain</span>
+                        <span class="text-[10px] tracking-widest text-earth uppercase font-semibold">Vacation Rentals</span>
+                    </div>
+                </a>
+                <p class="text-stone text-[11px] leading-relaxed">
+                    Premium vacation cabins in Banner Elk, Sugar Mountain, and Beech Mountain, North Carolina. Direct Houfy integration for guaranteed low rates.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-3">Quick Navigation</h4>
+<!-- ... existing code -->
